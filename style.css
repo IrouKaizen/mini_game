@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --game-width: 500px;
+    --game-height: 200px;
+    --ground: 9px;
+    --obstacle-size: 23px;
+    --accent: #18f;
+    --bg-dark: rgb(55, 54, 54);
+    --bg-light: rgb(50, 165, 203);
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to top, var(--bg-dark), var(--bg-light));
+    flex-direction: column;
+    padding: 20px;
+}
+
+section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: calc(var(--game-width) + 40px);
+}
+
+.jeu {
+    width: 100%;
+    max-width: var(--game-width);
+    height: var(--game-height);
+    border: 0;
+    border-bottom: 3px solid var(--accent);
+    overflow: hidden;
+    position: relative;
+    background: #f9f9f9;
+    border-radius: 8px 8px 0 0;
+}
+
+.perso {
+    width: 20px;
+    height: 50px;
+    position: absolute;
+    bottom: var(--ground);
+    left: 20px;
+}
+
+.perso img {
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+}
+
+.animation {
+    animation: perso-saut 500ms ease-in-out forwards;
+}
+
+@keyframes perso-saut {
+    0%   { bottom: var(--ground); }
+    25%  { bottom: 100px; }
+    50%  { bottom: 100px; }
+    100% { bottom: var(--ground); }
+}
+
+.obstacles {
+    width: var(--obstacle-size);
+    height: var(--obstacle-size);
+    background-color: #222;
+    position: absolute;
+    bottom: var(--ground);
+    left: calc(100% + var(--obstacle-size));
+    border-radius: 50%;
+    animation: anime-obstacles 2.5s linear infinite;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+@keyframes anime-obstacles {
+    0%   { left: calc(100% + var(--obstacle-size)); }
+    100% { left: calc(-1 * var(--obstacle-size) * 2); }
+}
+
+.control {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: calc(var(--game-width) + 40px);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+a, button, .score {
+    padding: 12px 40px;
+    border-radius: 8px;
+    border: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+
+a:hover, button:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+.score {
+    background: linear-gradient(135deg, #fff 60%, #e8f4ff);
+    border: 1px solid #d0e8ff;
+    cursor: default;
+    min-width: 160px;
+}
+
+.score span {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+#btn-jump {
+    background: linear-gradient(135deg, #18f, #06c);
+    color: #fff;
+    font-size: 16px;
+    padding: 14px 48px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(17, 136, 255, 0.35);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#btn-jump:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(17, 136, 255, 0.2);
+}
+
+p {
+    text-align: center;
+    margin-top: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+}
+
+@media screen and (max-width: 580px) {
+    :root {
+        --game-height: 160px;
+        --obstacle-size: 16px;
+        --ground: 16px;
+    }
+
+    section {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .perso {
+        width: 16px;
+        height: 40px;
+    }
+
+    a, button, .score {
+        padding: 11px 24px;
+        font-size: 14px;
+        min-width: 100px;
+    }
+
+    #btn-jump {
+        padding: 14px 40px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    :root {
+        --game-height: 130px;
+    }
+
+    .control-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/*Coding By Iroukaizen & Godwin-creator*/
